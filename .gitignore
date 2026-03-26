@@ -1,0 +1,16 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment & secrets
+.env
+*.json
+orders.db
+orders.db-shm
+orders.db-wal
+
+# IDE
+.vscode/
+.idea/
