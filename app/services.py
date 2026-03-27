@@ -1,5 +1,6 @@
 """Order service — normalizes webhook payloads and dispatches FCM notifications."""
 
+import json
 import logging
 import random
 import string
@@ -86,7 +87,9 @@ def build_normalized_order(payload: RetellWebhookPayload) -> NormalizedOrder:
         )
 
     # Use order_summary as the raw representation for readability
-    raw_text = args.order_summary or args.order_items_json
+    raw_text = args.order_summary or (
+        json.dumps(args.order_items_json) if isinstance(args.order_items_json, list) else args.order_items_json
+    )
 
     return NormalizedOrder(
         job_id=call.call_id,

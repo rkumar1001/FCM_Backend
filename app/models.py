@@ -20,7 +20,7 @@ class RetellArgs(BaseModel):
     phone_number: str = ""
     customer_name: str
     pickup_time: str = ""
-    order_items_json: str = "[]"
+    order_items_json: str | list = "[]"
     order_summary: str = ""
     # Accept any extra args
     model_config = {"extra": "allow"}

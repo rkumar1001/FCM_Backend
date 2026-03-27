@@ -8,16 +8,17 @@ from app.models import OrderItem
 _QTY_RE = re.compile(r"^(\d+)\s+(.+)$")
 
 
-def parse_order_items_json(raw_json: str) -> list[OrderItem]:
+def parse_order_items_json(raw_json: str | list) -> list[OrderItem]:
     """
-    Parse a JSON-encoded string like:
-      '[{"item_name":"Lamb Sherry Korma","quantity":1}, ...]'
-    into a list of OrderItem objects.
+    Parse order items from either a JSON-encoded string or a list of dicts.
     """
-    try:
-        items_list = json.loads(raw_json)
-    except (json.JSONDecodeError, TypeError):
-        return []
+    if isinstance(raw_json, list):
+        items_list = raw_json
+    else:
+        try:
+            items_list = json.loads(raw_json)
+        except (json.JSONDecodeError, TypeError):
+            return []
 
     items: list[OrderItem] = []
     for entry in items_list:

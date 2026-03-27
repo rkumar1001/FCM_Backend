@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.env
+*.json
+orders.db
+orders.db-shm
+orders.db-wal
+.git/
+.gitignore
+README.md
+.env.example
